@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UpdateEvent } from '../item-list/item-list.component';
 import { BudgetItem } from '../models/budget-item.model';
 
 @Component({
@@ -25,6 +26,12 @@ export class MainPageComponent implements OnInit {
     let index = this.budgetItems.indexOf(item);
     this.budgetItems.splice(index, 1);
     this.totalBudget -= item.amount;
+  }
+
+  updateItem(updateEvent: UpdateEvent) {
+    this.budgetItems[this.budgetItems.indexOf(updateEvent.old)] = updateEvent.new;
+    this.totalBudget -= updateEvent.old.amount;
+    this.totalBudget += updateEvent.new.amount;
   }
 
 }
