@@ -3,12 +3,26 @@
 
         <div class="income-column">
             <h1>Receitas</h1>
-            <app-item-card [isIncome]="true"></app-item-card>
-            <app-item-card></app-item-card>
+            <div class="budget-items">
+                <div *ngFor="let item of budgetItems">
+                    <app-item-card 
+                      *ngIf="item.amount >= 0" [item]="item"
+                      (xButtonClick)="onDeleteButtonClicked(item)"
+                      style="margin-bottom: 20px; display: block;"></app-item-card>
+                </div>
+            </div>
         </div>
 
         <div class="expenses-column">
             <h1>Gastos</h1>
+            <div class="budget-items">
+                <div *ngFor="let item of budgetItems">
+                    <app-item-card 
+                       *ngIf="item.amount < 0" [item]="item" 
+                       (xButtonClick)="onDeleteButtonClicked(item)" 
+                       style="margin-bottom: 20px; display: block;"></app-item-card>
+                </div>
+            </div>
         </div>
 
     </div>
